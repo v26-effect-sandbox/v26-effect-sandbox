@@ -1,0 +1,42 @@
+name: V26 B Read-Only Independent Evidence Recheck (not independent administrator)
+on:
+  workflow_dispatch:
+    inputs:
+      nonce:
+        description: Unique test nonce
+        required: true
+        type: string
+      expected_effect:
+        description: Whether the provider effect is expected
+        required: true
+        type: choice
+        options: [present, absent]
+permissions:
+  contents: read
+jobs:
+  readonly_readback:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - run: python -m pip install -r requirements.txt
+      - name: Verify exact Party A source signature and real GitHub provider bytes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          V26_NONCE: ${{ inputs.nonce }}
+          V26_EXPECT: ${{ inputs.expected_effect }}
+        run: >-
+          python independent_readback.py
+          --config config/pilot_config.json
+          --nonce "$V26_NONCE"
+          --expected-effect "$V26_EXPECT"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: v26-read-only-independent-github-data-check
+          path: evidence/
+          if-no-files-found: warn
+          retention-days: 30

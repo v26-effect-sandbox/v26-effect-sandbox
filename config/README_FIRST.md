@@ -1,0 +1,1 @@
+Create `config/pilot_config.json` from the example with public repo names, PUBLIC Party A key and fingerprint verified out of band, and public App ID. Do NOT put a signing key, GitHub App RSA PEM or bearer token here.

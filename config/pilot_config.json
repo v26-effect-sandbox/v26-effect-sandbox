@@ -1,0 +1,11 @@
+{
+  "party_a_ledger_repo": "PENDING_PARTY_A_ORG/v26-authority-ledger",
+  "party_b_target_repo": "v26-effect-sandbox/v26-effect-sandbox",
+  "party_a_trust_anchor_public_key_b64": "PENDING_PARTY_A_PUBLIC_KEY_ONLY",
+  "party_a_out_of_band_fingerprint_sha256": "PENDING_OUT_OF_BAND_VERIFIED_FINGERPRINT",
+  "party_a_github_app_name": "PENDING_PARTY_A_OWNED_APP_NAME",
+  "party_a_app_id": "PENDING_PARTY_A_APP_ID",
+  "party_b_protected_target_branch": "v26-protected-effects",
+  "party_b_unprotected_submission_branch": "v26-requests",
+  "no_real_production_effects": true
+}

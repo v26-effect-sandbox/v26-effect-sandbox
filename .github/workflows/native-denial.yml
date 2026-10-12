@@ -1,0 +1,26 @@
+name: V26 Party B Real GitHub Protected-Branch Bypass Test
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  native_denial:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - run: python -m pip install -r requirements.txt
+      - run: python probe_native_denials.py
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PARTY_B_TARGET_REPO: ${{ vars.PARTY_B_TARGET_REPO }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: v26-native-provider-bypass-negative-case
+          path: evidence/
+          if-no-files-found: warn
+          retention-days: 30

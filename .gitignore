@@ -1,0 +1,8 @@
+# Do not check in runtime tokens, credentials, or run artifacts.
+*.pem
+*.key
+.env
+.env.*
+__pycache__/
+.pytest_cache/
+evidence/
